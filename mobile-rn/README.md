@@ -51,3 +51,5 @@ Join our community of developers creating universal apps.
 
 
 user jarisibertech@gmail.com //Bismillah85!
+
+test auto pull 
