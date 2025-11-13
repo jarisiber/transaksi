@@ -4,10 +4,46 @@ import { initDB } from "./config/db.js";
 import rateLimiter from "./middleware/rateLimiter.js";
 
 import transactionsRoute from "./routes/transactionsRoute.js";
+import swaggerUi from "swagger-ui-express"
+import swaggerJSDoc from "swagger-jsdoc";
 
 dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT;
+
+// START SWAGGER
+
+   const swaggerOptions = {
+       swaggerDefinition: {
+           openapi: '3.0.0',
+           info: {
+               title: 'My API',
+               version: '1.0.0',
+               description: 'API documentation using Swagger',
+           },
+           servers: [
+               {
+                   url: `http://localhost:${PORT}`,
+               },
+           ],
+      components: {
+        securitySchemes: {
+            bearerAuth: {
+                type: 'http',
+                scheme: 'bearer',
+                bearerFormat: 'JWT', 
+            },
+        },
+    },
+       },
+       apis: ['./routes/transactionsRoute.js'], // Path to your API docs
+   };
+
+   const swaggerDocs = swaggerJSDoc(swaggerOptions);
+   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+// END SWAGGER
 
 if (process.env.NODE_ENV === "production") job.start();
 
@@ -20,8 +56,6 @@ app.use(express.json());
 //   console.log("Hey we hit a req, the method is", req.method);
 //   next();
 // });
-
-const PORT = process.env.PORT || 5001;
 
 app.get("/api/health", (req, res) => {
   res.status(200).json({ status: "ok" });
