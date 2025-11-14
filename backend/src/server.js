@@ -12,42 +12,43 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 
-// START SWAGGER
+// START SWAGGER AND SWAGGER DEFINITION
 
-   const swaggerOptions = {
-       swaggerDefinition: {
-           openapi: '3.0.0',
-           info: {
-               title: 'My API',
-               version: '1.0.0',
-               description: 'API documentation using Swagger',
+  const swaggerOptions = {
+      swaggerDefinition: {
+          openapi: '3.0.0',
+          info: {
+              title: 'TRANSAKSI-RP',
+              version: '1.0.0',
+              description: 'API documentation for Transaksi Rp',
+          },
+          servers: [
+              {
+                  url: `http://localhost:${PORT}`,
+                  description: 'Development server',
+              },
+          ],
+     components: {
+       securitySchemes: {
+           bearerAuth: {
+               type: 'http',
+               scheme: 'bearer',
+               bearerFormat: 'JWT', 
            },
-           servers: [
-               {
-                   url: `http://localhost:${PORT}`,
-               },
-           ],
-      components: {
-        securitySchemes: {
-            bearerAuth: {
-                type: 'http',
-                scheme: 'bearer',
-                bearerFormat: 'JWT', 
-            },
-        },
-    },
        },
-       apis: ['./routes/transactionsRoute.js'], // Path to your API docs
-   };
+   },
+      },
+      apis: ['./src/routes/*.js'], // Path to your API docs
+  };
 
-   const swaggerDocs = swaggerJSDoc(swaggerOptions);
-   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+  const swaggerDocs = swaggerJSDoc(swaggerOptions);
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // END SWAGGER
 
 if (process.env.NODE_ENV === "production") job.start();
 
-// middleware
+// MIDDLEWARE
 app.use(rateLimiter);
 app.use(express.json());
 
