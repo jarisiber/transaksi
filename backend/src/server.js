@@ -20,7 +20,7 @@ const PORT = process.env.PORT;
           info: {
               title: 'TRANSAKSI-RP',
               version: '1.0.0',
-              description: 'API documentation for Transaksi Rp',
+              description: 'REST API for test API "Transaksi Rp" Application',
           },
           servers: [
               {
