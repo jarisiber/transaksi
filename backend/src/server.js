@@ -27,6 +27,10 @@ const PORT = process.env.PORT;
                   url: `http://localhost:${PORT}`,
                   description: 'Development server',
               },
+              {
+                  url: `http://202.51.103.154:3002`,
+                  description: 'Live Development server',
+              },
           ],
      components: {
        securitySchemes: {
