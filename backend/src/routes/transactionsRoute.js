@@ -22,6 +22,7 @@ const router = express.Router();
  *           type: string
  *         required: true
  *         description: The user ID
+ *         example: user_356Hee4twzOUq0ddFMXMxhUG0If
  *     responses:
  *       200:
  *         description: List of transactions retrieved successfully
