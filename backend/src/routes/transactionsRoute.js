@@ -21,7 +21,7 @@ const router = express.Router();
  *         schema:
  *           type: string
  *         required: true
- *         description: The user ID exist : user_356Hee4twzOUq0ddFMXMxhUG0If
+ *         description: The user ID
  *     responses:
  *       200:
  *         description: List of transactions retrieved successfully
